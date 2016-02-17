@@ -7,7 +7,7 @@ echo 'LANG="en_US.UTF-8"' >> /etc/sysconfig/i18n
 echo 'SYSFONT="latarcyrheb-sun16"' >> /etc/sysconfig/i18n
 
 yum -y groupinstall "Development Tools"
-yum -y install libtool-ltdl-devel openssl-devel openssl mod_ssl pcre-devel gcc make gcc-c++ rpm-build rpm-devel autoconf automake lynx ncurses
+yum -y install iftop htop libtool-ltdl-devel openssl-devel openssl mod_ssl pcre-devel gcc make gcc-c++ rpm-build rpm-devel autoconf automake lynx ncurses
 yum -y install mysql-devel mysql-server php-mysqli httpd-devel php-devel php-common php-gd php-mcrypt php-xml php-xmlrpc php-domxml php-mbstring php-pear
 
 yum -y install git npm
@@ -72,10 +72,13 @@ echo "extension=imagick.so" >> /etc/php.d/imagick.ini
 #----------------------
 
 #-----datetime sync-----
-#yum -y install ntp
-#ntpdate pool.ntp.org
-#systemctl start ntpd
-#systemctl enable ntpd
+mv /etc/localtime /etc/localtime.bak
+ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+yum -y install ntp
+/usr/sbin/ntpdate pool.ntp.org
+systemctl start ntpd
+systemctl enable ntpd
+ln -s '/usr/lib/systemd/system/ntpd.service' '/etc/systemd/system/multi-user.target.wants/ntpd.service'
 
 
 
