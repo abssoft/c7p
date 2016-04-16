@@ -6,12 +6,9 @@
 echo 'LANG="en_US.UTF-8"' >> /etc/sysconfig/i18n
 echo 'SYSFONT="latarcyrheb-sun16"' >> /etc/sysconfig/i18n
 
-# mariadb 10
-printf "[mariadb]\nname = MariaDB\nbaseurl = http://yum.mariadb.org/10.0/centos7-amd64\ngpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB\ngpgcheck=1" >> /etc/yum.repos.d/MariaDB.repo
-
-yum -y install iftop htop atop libtool-ltdl-devel openssl-devel openssl mod_ssl pcre-devel gcc make gcc-c++ rpm-build rpm-devel autoconf automake lynx ncurses
-yum -y install MariaDB-server MariaDB-client MariaDB-devel php-mysql httpd-devel php-devel php-common php-gd php-mcrypt php-xml php-xmlrpc php-domxml php-mbstring php-pear
 yum -y groupinstall "Development Tools"
+yum -y install iftop htop libtool-ltdl-devel openssl-devel openssl mod_ssl pcre-devel gcc make gcc-c++ rpm-build rpm-devel autoconf automake lynx ncurses
+yum -y install mysql-devel mysql-server php-mysqli httpd-devel php-devel php-common php-gd php-mcrypt php-xml php-xmlrpc php-domxml php-mbstring php-pear
 
 yum -y install git npm
 npm install -g bower
@@ -31,7 +28,7 @@ yum -y install memcached
 systemctl start memcached
 systemctl enable memcached
 
-printf "yes\n" | pecl install memcache
+pecl install  memcache
 printf "extension=memcache.so" > /etc/php.d/memcache.ini
 systemctl restart httpd
 #----------- memcache end ----------
@@ -46,11 +43,17 @@ cd sphinx-2.2.10-release
 ./configure --prefix=/usr/local/sphinx
 make && make install
 
+#/usr/local/sphinx/etc
+# add config
+
 #---- add sphinx cronjobs
 
 printf "\n@reboot /usr/local/sphinx/bin/searchd --config /usr/local/sphinx/etc/sphinx.conf" >> /var/spool/cron/root
 
+printf "\n1 */12 * * *  /usr/bin/pgrep indexer || time /usr/local/sphinx/bin/indexer --all --rotate --config /usr/local/sphinx/etc/sphinx.conf" >> /var/spool/cron/root
+
 #--------------sphinx end------------------
+
 
 
 #------unoconv begin---------------------
