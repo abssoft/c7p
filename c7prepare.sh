@@ -7,7 +7,7 @@ echo 'LANG="en_US.UTF-8"' >> /etc/sysconfig/i18n
 echo 'SYSFONT="latarcyrheb-sun16"' >> /etc/sysconfig/i18n
 
 # mariadb 10
-printf "[mariadb]\n name = MariaDB\n baseurl = http://yum.mariadb.org/10.0/centos7-amd64 \n gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB \n gpgcheck=1" >> /etc/yum.repos.d/MariaDB.repo
+printf "[mariadb]\nname = MariaDB\nbaseurl = http://yum.mariadb.org/10.0/centos7-amd64\ngpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB\ngpgcheck=1" >> /etc/yum.repos.d/MariaDB.repo
 
 yum -y install iftop htop atop libtool-ltdl-devel openssl-devel openssl mod_ssl pcre-devel gcc make gcc-c++ rpm-build rpm-devel autoconf automake lynx ncurses
 yum -y install MariaDB-server MariaDB-client php-mysql httpd-devel php-devel php-common php-gd php-mcrypt php-xml php-xmlrpc php-domxml php-mbstring php-pear
