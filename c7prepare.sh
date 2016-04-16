@@ -28,7 +28,7 @@ yum -y install memcached
 systemctl start memcached
 systemctl enable memcached
 
-pecl install  memcache
+printf "yes\n" | pecl install  memcache
 printf "extension=memcache.so" > /etc/php.d/memcache.ini
 systemctl restart httpd
 #----------- memcache end ----------
