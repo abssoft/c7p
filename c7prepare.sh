@@ -8,7 +8,7 @@ echo 'SYSFONT="latarcyrheb-sun16"' >> /etc/sysconfig/i18n
 
 yum -y groupinstall "Development Tools"
 yum -y install iftop htop libtool-ltdl-devel openssl-devel openssl mod_ssl pcre-devel gcc make gcc-c++ rpm-build rpm-devel autoconf automake lynx ncurses
-yum -y install mysql-devel mysql-server php-mysqli httpd-devel php-devel php-common php-gd php-mcrypt php-xml php-xmlrpc php-domxml php-mbstring php-pear
+yum -y install mysql-devel mysql-server php-mysqli httpd-devel php-devel php-common php-gd php-mcrypt php-xml php-xmlrpc php-domxml php-mbstring php-pear  php-soap
 
 yum -y install git npm
 npm install -g bower
