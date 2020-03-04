@@ -65,6 +65,7 @@ printf "\n1 */12 * * *  /usr/bin/pgrep indexer || time /usr/local/sphinx/bin/ind
 #------unoconv end-----------------------
 
 #---Imagick---
+yum install libwebp libwebp-tools
 
 yum -y install ImageMagick ImageMagick-devel ImageMagick-perl
 printf "\n" | pecl install imagick
